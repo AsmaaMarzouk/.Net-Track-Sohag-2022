@@ -1,1 +1,44 @@
-<p>home works!</p>
+<!-- Class -->
+<!-- <h1>{{storeClass.name}}</h1> -->
+<!-- <img src="{{storeClass.imgURL}}" alt=""> -->
+
+<!-- property binding -->
+<!-- <img [src]="storeClass.imgURL" alt=""> -->
+
+<!-- <p>{{storeClass.branches}}</p> -->
+<!-- <ul>
+    <li>Item1</li>
+    <li>Item2</li>
+    <li>Item3</li>
+</ul> -->
+<!-- <ul>
+    <li>{{storeClass.branches[3]}}</li>
+</ul> -->
+
+<!-- loop on element => *ngFor = "variable of arrayName" -->
+<!-- <ul>
+    <li *ngFor="let item of storeClass.branches">{{item}}</li>
+</ul> -->
+
+
+<!-- Interface -->
+<!-- <h2>name from interface : {{storeData.name}}</h2>
+
+<img src="{{storeData.coverImg}}" alt=""> -->
+
+
+
+<!-- Event Binding -->
+<br>
+<!-- check => *ngIf="statement" -->
+<img src="{{storeData.coverImg}}" *ngIf="showImg">
+<br>
+<button class="btn btn-primary" (click)="toggleImg()">Show</button>
+
+
+<!--  -->
+<label for="input1">Enter data</label>
+<!-- <input type="text" class="form-control" id="input1" name="input1" [value]="userFeedback"> -->
+<input type="text" class="form-control" id="input1" name="input1" [(ngModel)]="userFeedback">
+
+{{userFeedback}}
