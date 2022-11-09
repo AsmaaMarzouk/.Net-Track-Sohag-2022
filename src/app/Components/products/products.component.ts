@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Iproduct } from 'src/app/Models/iproduct';
 
 @Component({
@@ -6,10 +6,21 @@ import { Iproduct } from 'src/app/Models/iproduct';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit,OnChanges {
 
    prdList:Iproduct[];
+  //  Day3
+  // property decorator
+ @Input() receivedCatID:number = 0;
+  prdListOfCat:Iproduct[]=[];
+  totalPrice:number = 0;
+  // 1-declare event
+  @Output() totalPriceChanged:EventEmitter<number>;
   constructor() { 
+    // Day3
+    this.totalPriceChanged=new EventEmitter<number>();
+
+
     // intialize array with objects
     // category id => mobile : 1 , laptop: 2, tv : 3
     this.prdList=[
@@ -23,8 +34,42 @@ export class ProductsComponent implements OnInit {
 
    
   }
+  // Day3
+  ngOnChanges(): void {
+
+    this.getProductsOfCatID();
+  }
 
   ngOnInit(): void {
+    // Day3
+    // this.getProductsOfCatID();
+  }
+
+  // Day3
+  private getProductsOfCatID()
+  {
+    if(this.receivedCatID==0)
+    {
+      // this.prdListOfCat = this.prdList;
+      // from take copy from prdList array to another prdListOfCat array
+      this.prdListOfCat =Array.from(this.prdList);
+      return;
+    }
+
+    this.prdListOfCat= this.prdList.filter((prd)=>prd.catID==this.receivedCatID);
+
+  }
+
+  updateTotalPrice(prdPrice:number,itemsCount:any){
+    // this.totalPrice +=  (prdPrice * itemsCount)
+    // convert string to number
+    // this.totalPrice +=  (prdPrice * parseInt(itemsCount));
+    // this.totalPrice +=  (prdPrice * Number(itemsCount));
+    // this.totalPrice +=  (prdPrice * itemsCount as number);
+    this.totalPrice +=  (prdPrice * +itemsCount);
+
+    this.totalPriceChanged.emit(this.totalPrice);
+
   }
 
 }
