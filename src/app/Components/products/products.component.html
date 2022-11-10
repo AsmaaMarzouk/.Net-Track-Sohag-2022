@@ -8,6 +8,7 @@
       <th scope="col">Quantity</th>
       <th scope="col">Price</th>
       <th scope="col">Count</th>
+      <th scope="col">Details</th>
       <th scope="col">Buy</th>
     </tr>
   </thead>
@@ -73,6 +74,10 @@
         <td>{{prd.price}}</td>
         <!-- <td><button class="btn btn-success" [hidden]="prd.quantity==0">Buy</button></td> -->
         <td><input type="number" class="form-control" #itemCount></td>
+        <!-- Day4 -->
+        <td><button class="btn btn-danger" (click)="openPrdDetails(prd.id)">Details</button></td>
+        <!-- Another solution-->
+        <!-- <td><a class="btn btn-danger" [routerLink]="['/Products',prd.id]">Details</a></td> -->
         <td><button class="btn btn-success" [disabled]="prd.quantity==0" (click)="updateTotalPrice(prd.price,itemCount.value)">Add to cart</button></td>
       </tr>
     </ng-container>
