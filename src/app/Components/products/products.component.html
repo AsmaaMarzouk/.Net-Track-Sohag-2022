@@ -1,3 +1,6 @@
+
+<!-- <button class="btn btn-success" type="button" [routerLink]="['/newProduct']">Add New Product</button> -->
+<a class="btn btn-success" type="button" [routerLink]="['/newProduct']">Add New Product</a>
 <table class="table m-2">
   <thead class="bg-dark text-light">
     <tr>
@@ -6,7 +9,8 @@
       <th scope="col">Name</th>
       <th scope="col">Image</th>
       <th scope="col">Quantity</th>
-      <th scope="col">Price</th>
+      <th scope="col">Price in USD</th>
+      <th scope="col">Price in EGP</th>
       <th scope="col">Count</th>
       <th scope="col">Details</th>
       <th scope="col">Buy</th>
@@ -47,8 +51,8 @@
         [ngStyle]="{'background-color':(prd.quantity==0)?'lightyellow':'lightblue','color':(prd.quantity==0)?'red':'blue'}">
         <!-- <td>{{prd.id}}</td> -->
         <td>{{i+1}}</td>
-        <td>{{prd.name}}</td>
-        <td><img src="{{prd.imgURL}}" width="80" height="80"></td>
+        <td>{{prd.name|uppercase}}</td>
+        <td><img src="{{prd.imgURL}}" width="80" height="80" BorderBox="yellow" default="blue"></td>
         <!-- <td>{{prd.quantity}}</td> -->
         <!-- <td>
             <span *ngIf="prd.quantity>0">{{prd.quantity}}</span>
@@ -71,7 +75,10 @@
 
           </ng-container>
         </td>
-        <td>{{prd.price}}</td>
+        <!-- Day5 -->
+        <!-- <td>{{prd.price|currency:'USD':'symbol'}}</td> -->
+        <td>{{prd.price|currency:'USD':'code'}}</td>
+        <td>{{prd.price|usdToEgp:25|currency:'EGP'}}</td>
         <!-- <td><button class="btn btn-success" [hidden]="prd.quantity==0">Buy</button></td> -->
         <td><input type="number" class="form-control" #itemCount></td>
         <!-- Day4 -->
@@ -87,3 +94,5 @@
 
 
 <!-- <h2>For test total price : {{totalPrice}}</h2> -->
+
+<h1>{{todayDate|date:'shortDate'}}</h1>

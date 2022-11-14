@@ -1,0 +1,74 @@
+
+<form  class="m-2" [formGroup]="userFormGroup">
+    <div class="mb-3">
+      <label for="usrName" class="form-label">Full Name</label>
+     
+      <input type="text" class="form-control" name="usrName" id="usrName" formControlName="fullName" [class.is-valid]="fullName?.valid" [class.is-invalid]="fullName?.invalid">
+      <!-- <div [hidden]="userFormGroup.get('fullName')?.valid || userFormGroup.get('fullName')?.untouched" class="alert alert-warning"> -->
+        <div [hidden]="fullName?.valid || fullName?.untouched" class="alert alert-warning">
+        <small *ngIf="fullName?.errors?.['required']">Name is Required</small>
+        <small *ngIf="fullName?.errors?.['minlength']">Name must be 3 letters at least</small>
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="usrEmail" class="form-label">Email</label>
+      <input type="email" class="form-control" name="usrEmail" id="usrEmail" formControlName="email">
+    </div>
+  
+   
+   
+    <div formArrayName="mobileNo">
+      <div class="mb-3 ms-4" *ngFor="let mob of mobileNo.controls;let i=index">
+        <label for="usrMobile{{i+1}}" class="form-label">Mobile No.{{i+1}}</label>
+        <input type="number"  class="form-control" name="usrMobile{{i+1}}" id="usrMobile{{i+1}}" [formControlName]="i"> 
+        <button class="btn btn-primary d-block ms-auto" (click)="addMobileNo()" *ngIf="mob.value && i==mobileNo.controls.length-1">+</button>
+      </div>
+    </div>
+  
+    <div formGroupName="address">
+      Address:
+      <div class="mb-3 ms-2">
+        <label for="usrCity" class="form-label">city</label>
+        <input type="text" class="form-control" name="usrCity" id="usrCity" formControlName="city">
+      </div>
+      <div class="mb-3 ms-2">
+        <label for="usrStreet" class="form-label">Street</label>
+        <input type="text"  class="form-control" name="usrStreet" id="usrStreet" formControlName="street">
+      </div>
+    </div>
+  
+  
+    <div class="mb-3">
+      <label for="usrPass" class="form-label">Password</label>
+      <input type="password" class="form-control" name="usrPass" id="usrPass" formControlName="password">
+    </div>
+  
+    <div class="mb-3">
+      <label for="usrRePass" class="form-label">Retype Password</label>
+      <input type="password"  class="form-control" name="usrRePass" id="usrRePass" formControlName="repassword">
+    </div>
+  
+   <!-- <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+      <input type="radio" class="btn-check" formControlName="referral" name="referral" id="btnradio1" autocomplete="off"
+        value="SocialMedia">
+      <label class="btn btn-outline-primary" for="btnradio1">Social media</label>
+      <input type="radio" class="btn-check" formControlName="referral" name="referral" id="btnradio2" autocomplete="off"
+        value="Friend" >
+      <label class="btn btn-outline-primary" for="btnradio2">from a Friend</label>
+      <input type="radio" class="btn-check" formControlName="referral" name="referral" id="btnradio3" autocomplete="off"
+        value="other"  >
+      <label class="btn btn-outline-primary" for="btnradio3">other</label>
+    </div>
+   -->
+  
+  <br>
+    <button type="submit" class="btn btn-success" [disabled]="userFormGroup.invalid">Sign Up</button>
+  </form>
+
+  <div class="bg-info">
+    {{userFormGroup.value | json}}
+  </div>
+  
+  
+  
